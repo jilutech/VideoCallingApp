@@ -5,7 +5,7 @@ Overview
 
 This is a simple two-screen video calling app built using Stream SDK for real-time communication. The app is developed using modern Android development practices, including Jetpack Compose, MVVM architecture, Koin for dependency injection, and ViewModel for UI state management.
 
-Features
+# Features
 
 Video Calling: Real-time video calling functionality powered by Stream SDK.
 
@@ -17,7 +17,7 @@ Koin for Dependency Injection: Simplifies dependency management.
 
 ViewModel: Manages UI-related data lifecycle-aware manner.
 
-Tech Stack
+# Tech Stack
 
 Programming Language: Kotlin
 
