@@ -14,11 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.example.videocallingapp.Manifest
-import com.squareup.wire.Message
 import io.getstream.video.android.compose.permission.rememberCallPermissionsState
 import io.getstream.video.android.compose.ui.components.call.activecall.CallContent
-import io.getstream.video.android.compose.ui.components.video.VideoRenderer
+import io.getstream.video.android.compose.ui.components.call.controls.actions.DefaultOnCallActionHandler
+import io.getstream.video.android.core.call.state.LeaveCall
+import kotlin.math.acos
 
 
 @Composable
@@ -78,12 +78,20 @@ fun VideoScreen(
                         }else{
                             onAction(VideoCallAction.JoinCall)
                         }
-                    }
+                    },
 //                    onAllPermissionsGranted = {
 //                        onAction(VideoCallAction.JoinCall)
 //                    }
                 ),
-
+                onCallAction = { action ->
+                    if (action == LeaveCall){
+                        onAction(VideoCallAction.OnDisconnectClick)
+                    }
+                    DefaultOnCallActionHandler.onCallAction(state.call, action)
+                },
+                onBackPressed = {
+                    onAction(VideoCallAction.OnDisconnectClick)
+                }
             )
         }
     }

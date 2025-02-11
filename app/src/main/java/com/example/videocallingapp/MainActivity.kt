@@ -21,6 +21,7 @@ import com.example.videocallingapp.ui.theme.VideoCallingAppTheme
 import com.example.videocallingapp.video.CallState
 import com.example.videocallingapp.video.VideoCallViewModel
 import com.example.videocallingapp.video.VideoScreen
+import io.getstream.video.android.compose.theme.VideoTheme
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import org.koin.androidx.compose.koinViewModel
@@ -33,7 +34,10 @@ class MainActivity : ComponentActivity() {
             VideoCallingAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                      val navController = rememberNavController()
-                     NavHost(navController = navController, startDestination = ConnectRoute){
+                     NavHost(navController = navController,
+                         startDestination = ConnectRoute,
+                         modifier = Modifier.padding(innerPadding)
+                     ){
                          composable<ConnectRoute>(){
                             val viewModel = koinViewModel<ConnectionViewModel>()
                              val state = viewModel.state
@@ -64,7 +68,9 @@ class MainActivity : ComponentActivity() {
                                      }
                                  }
                              }
-                             VideoScreen(state=state, onAction = viewModel::onAction)
+                             VideoTheme {
+                                 VideoScreen(state=state, onAction = viewModel::onAction)
+                             }
                          }
                      }
                 }
